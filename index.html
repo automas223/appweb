@@ -1,0 +1,66 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Datos de Transferencia - Lubricentro Automas</title>
+  <style>
+    body { margin:0; font-family:Arial, sans-serif; background:#0f172a; color:#e5e7eb; display:flex; justify-content:center; align-items:center; min-height:100vh; }
+    .card { background:#111827; padding:20px; border-radius:15px; max-width:420px; width:100%; box-shadow:0 6px 20px rgba(0,0,0,.4); }
+    h1 { margin-top:0; font-size:20px; }
+    .row { display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid #374151; }
+    .row:last-child { border-bottom:none; }
+    .label { color:#9ca3af; font-weight:bold; }
+    .value { font-weight:600; }
+    button { width:100%; padding:12px; margin-top:16px; border:none; border-radius:10px; background:#3b82f6; color:white; font-weight:bold; cursor:pointer; }
+    button:hover { background:#2563eb; }
+    .toast { text-align:center; margin-top:10px; color:#22c55e; font-weight:bold; display:none; }
+    footer { margin-top:20px; font-size:12px; color:#9ca3af; text-align:center; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Datos de Transferencia</h1>
+    <div class="row"><div class="label">Empresa:</div><div class="value" id="empresa"></div></div>
+    <div class="row"><div class="label">RUT:</div><div class="value" id="rut"></div></div>
+    <div class="row"><div class="label">Banco:</div><div class="value" id="banco"></div></div>
+    <div class="row"><div class="label">Tipo:</div><div class="value" id="tipo"></div></div>
+    <div class="row"><div class="label">Número:</div><div class="value" id="numero"></div></div>
+    <div class="row"><div class="label">Correo:</div><div class="value" id="correo"></div></div>
+    <button onclick="copiarDatos()">Copiar todos los datos</button>
+    <div class="toast" id="mensaje">¡Datos copiados!</div>
+    <footer>
+      Al pegar en tu banco se verá así.<br>
+      Actualiza valores en el archivo si cambian.<br>
+      © Lubricentro y Vulcanización Automas
+    </footer>
+  </div>
+
+  <script>
+    // 🔹 SOLO EDITA ESTA PARTE 🔹
+    const datos = {
+      empresa: "LUBRICENTRO AUTOMAS",
+      rut: "77.799.019-5",
+      banco: "Banco Santander",
+      tipo: "Cuenta Corriente",
+      numero: "92401111",
+      correo: "automaslubricentro@gmail.com"
+    };
+    // 🔹 FIN DE EDICIÓN 🔹
+
+    // Mostrar datos en la tarjeta
+    for (const campo in datos) {
+      document.getElementById(campo).textContent = datos[campo];
+    }
+
+    // Copiar al portapapeles
+    function copiarDatos() {
+      let texto = Object.entries(datos).map(([k,v]) => `${k[0].toUpperCase()+k.slice(1)}: ${v}`).join("\n");
+      navigator.clipboard.writeText(texto).then(() => {
+        document.getElementById("mensaje").style.display = "block";
+        setTimeout(()=> document.getElementById("mensaje").style.display = "none", 2000);
+      });
+    }
+  </script>
+</body>
+</html>
